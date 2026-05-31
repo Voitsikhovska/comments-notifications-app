@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "CommentsApp" %></title>
+    <title><%= content_for(:title) || "CommentHub" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,7 +13,7 @@
   <body class="bg-gray-50 min-h-screen">
     <nav class="bg-white border-b border-gray-200">
       <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-        <%= link_to "CommentsApp", root_path, class: "text-lg font-bold text-gray-900" %>
+        <%= link_to "CommentHub", root_path, class: "text-lg font-bold text-gray-900" %>
         <div class="flex items-center gap-4">
           <% if user_signed_in? %>
             <span class="text-sm text-gray-500">@<%= current_user.username %></span>
