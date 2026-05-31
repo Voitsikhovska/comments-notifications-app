@@ -22,6 +22,11 @@
     <p class="text-hint mt-1"><%= comment.body.to_s.length %> / 1000</p>
   </div>
 
-  <%= f.submit local_assigns.fetch(:submit_label, "Post comment"), class: "btn-primary w-full" %>
+  <div class="flex justify-end mt-2">
+    <%= f.button type: "submit", class: "btn-submit" do %>
+      <%= image_tag "send.svg", class: "w-3.5 h-3.5 invert", alt: "" %>
+      <%= local_assigns.fetch(:submit_label, "Post comment") %>
+    <% end %>
+  </div>
 <% end %>
 

@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  def show
+    @user = User.find_by!(username: params[:username])
+    @comments = @user.comments.recent
+  end
+
   def search
     query = params[:q].to_s.strip
     safe_query = User.sanitize_sql_like(query)
