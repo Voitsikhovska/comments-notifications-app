@@ -85,5 +85,7 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
-        run: bundle exec rspec
+        run: |
+          bundle exec rails db:create db:migrate
+          bundle exec rspec
 
