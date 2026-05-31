@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:edit, :update, :destroy]
-  before_action :authorize_comment!, only: [:edit, :update, :destroy]
+  before_action :set_comment, only: [ :edit, :update, :destroy ]
+  before_action :authorize_comment!, only: [ :edit, :update, :destroy ]
 
   def index
     load_comments

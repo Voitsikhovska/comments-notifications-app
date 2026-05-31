@@ -4,4 +4,3 @@ class Comment < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 end
-

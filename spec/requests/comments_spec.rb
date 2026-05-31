@@ -97,4 +97,3 @@ RSpec.describe "Comments", type: :request do
     end
   end
 end
-
