@@ -1,0 +1,27 @@
+<% content_for :title, "@#{@user.username}" %>
+
+<div class="max-w-2xl mx-auto">
+  <div class="profile-header">
+    <div class="profile-header-inner">
+      <div class="profile-avatar">
+        <%= @user.username.first.upcase %>
+      </div>
+      <div>
+        <h1 class="profile-username">@<%= @user.username %></h1>
+        <p class="profile-meta"><%= pluralize(@comments.size, "comment") %></p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="profile-section-title">Comments</h2>
+
+  <% if @comments.empty? %>
+    <div class="card p-8 text-center text-gray-400">
+      No comments yet.
+    </div>
+  <% else %>
+    <div class="space-y-4">
+      <%= render @comments %>
+    </div>
+  <% end %>
+</div>

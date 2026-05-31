@@ -24,7 +24,9 @@
                 <span class="notification-badge"><%= unread > 99 ? "99+" : unread %></span>
               <% end %>
             <% end %>
-            <span class="text-sm text-gray-500"><%= current_user.username %></span>
+            <%= link_to user_profile_path(username: current_user.username), class: "nav-avatar", title: "@#{current_user.username}" do %>
+              <%= image_tag "user.svg", class: "nav-avatar-icon", alt: current_user.username %>
+            <% end %>
             <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-danger" %>
           <% else %>
             <%= link_to "Sign in", new_user_session_path, class: "link" %>

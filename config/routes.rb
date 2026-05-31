@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   get "users/search", to: "users#search"
+  get "users/:username", to: "users#show", as: :user_profile
 
   get "up" => "rails/health#show", as: :rails_health_check
 
