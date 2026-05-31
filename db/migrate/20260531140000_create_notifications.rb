@@ -12,4 +12,3 @@ class CreateNotifications < ActiveRecord::Migration[8.1]
     add_index :notifications, [ :user_id, :read ]
   end
 end
-

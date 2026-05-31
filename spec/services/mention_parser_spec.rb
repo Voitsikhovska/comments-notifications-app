@@ -61,4 +61,3 @@ RSpec.describe MentionParser do
     end
   end
 end
-
