@@ -63,6 +63,12 @@ jobs:
           - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
 
+      meilisearch:
+        image: getmeili/meilisearch:latest
+        ports:
+          - 7700:7700
+        options: --health-cmd="curl -f http://localhost:7700/health" --health-interval=10s --health-timeout=5s --health-retries=3
+
       # redis:
       #   image: valkey/valkey:8
       #   ports:
@@ -96,6 +102,7 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          MEILISEARCH_URL: http://localhost:7700
         run: |
           bundle exec rails db:create db:migrate
           bundle exec rspec
