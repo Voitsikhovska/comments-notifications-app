@@ -5,57 +5,45 @@
     <h1 class="page-title">Comments</h1>
   </div>
 
-  <%= form_with url: comments_path, method: :get, class: "search-form mb-4" do |f| %>
+  <%= form_with url: comments_path, method: :get, class: "search-form mb-4",
+                data: { turbo_frame: "comments-results" } do |f| %>
     <div class="search-input-wrapper">
       <%= image_tag "search.svg", class: "search-icon", alt: "" %>
       <%= f.search_field :q, value: @query,
             placeholder: "Search comments…",
             class: "search-input",
-            autofocus: @query.present?,
+            autofocus: true,
             onsearch: "this.form.requestSubmit()" %>
     </div>
   <% end %>
 
-  <% if @query.present? %>
-    <p class="text-hint mb-3">
-      <%= @comments.size %> result<%= @comments.size == 1 ? "" : "s" %> for "<%= @query %>"
-    </p>
+  <%= turbo_frame_tag "comments-results" do %>
+    <% if @query.present? %>
+      <p class="text-hint mb-3">
+        <%= @comments.size %> result<%= @comments.size == 1 ? "" : "s" %> for "<%= @query %>"
+      </p>
+    <% end %>
+
+    <div class="space-y-4">
+      <% unless @query.present? %>
+        <div class="card p-5">
+          <%= render "form", comment: @comment, url: comments_path %>
+        </div>
+      <% end %>
+
+      <% if @comments.empty? %>
+        <div class="card p-8 text-center text-gray-400">
+          <% if @query.present? %>
+            No comments found for "<%= @query %>".
+          <% else %>
+            No comments yet. Be the first to comment!
+          <% end %>
+        </div>
+      <% else %>
+        <%= render @comments %>
+      <% end %>
+    </div>
   <% end %>
 
-  <div class="space-y-4">
-    <% unless @query.present? %>
-      <div class="card p-5">
-        <%= render "form", comment: @comment, url: comments_path %>
-      </div>
-    <% end %>
-
-    <% if @comments.empty? %>
-      <div class="card p-8 text-center text-gray-400">
-        <% if @query.present? %>
-          No comments found for "<%= @query %>".
-        <% else %>
-          No comments yet. Be the first to comment!
-        <% end %>
-      </div>
-    <% else %>
-      <%= render @comments %>
-    <% end %>
-  </div>
-
-  <div class="modal-backdrop"
-       data-confirm-delete-target="modal"
-       data-action="click->confirm-delete#backdropClick">
-    <div class="modal-box" data-confirm-delete-target="box">
-      <h3 class="modal-title">Delete comment?</h3>
-      <p class="modal-message">This action cannot be undone.</p>
-      <div class="modal-actions">
-        <button type="button" class="btn-secondary" data-action="confirm-delete#hide">Cancel</button>
-        <form method="post" data-confirm-delete-target="deleteForm">
-          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-          <input type="hidden" name="_method" value="delete">
-          <button type="submit" class="btn-danger">Yes, delete</button>
-        </form>
-      </div>
-    </div>
-  </div>
+  <%= render "shared/confirm_delete_modal" %>
 </div>
