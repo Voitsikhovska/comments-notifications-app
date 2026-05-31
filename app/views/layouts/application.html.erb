@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="icon" href="<%= asset_path('logo.svg') %>" type="image/svg+xml">
     <link rel="icon" href="/icon.png" type="image/png">
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
@@ -13,7 +14,10 @@
   <body class="bg-gray-50 min-h-screen">
     <nav class="bg-white border-b border-gray-200">
       <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-        <%= link_to "CommentHub", root_path, class: "text-lg font-bold text-gray-900" %>
+        <%= link_to root_path, class: "flex items-center gap-2 text-lg font-bold text-gray-900 hover:opacity-80 transition-opacity" do %>
+          <%= image_tag "logo.svg", width: 24, height: 24, alt: "CommentHub" %>
+          CommentHub
+        <% end %>
         <div class="flex items-center gap-4">
           <% if user_signed_in? %>
             <%= link_to "Comments", comments_path, class: "link text-sm" %>

@@ -1,0 +1,16 @@
+<div class="modal-backdrop"
+     data-confirm-delete-target="modal"
+     data-action="click->confirm-delete#backdropClick">
+  <div class="modal-box" data-confirm-delete-target="box">
+    <h3 class="modal-title">Delete comment?</h3>
+    <p class="modal-message">This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-secondary" data-action="confirm-delete#hide">Cancel</button>
+      <form method="post" data-confirm-delete-target="deleteForm">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="btn-danger">Yes, delete</button>
+      </form>
+    </div>
+  </div>
+</div>
