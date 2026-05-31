@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_31_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_31_140000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_31_120000) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "actor_id", null: false
+    t.bigint "comment_id", null: false
+    t.datetime "created_at", null: false
+    t.boolean "read", default: false, null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["user_id", "read"], name: "index_notifications_on_user_id_and_read"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,4 +47,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_31_120000) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "notifications", "comments"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "users", column: "actor_id"
 end

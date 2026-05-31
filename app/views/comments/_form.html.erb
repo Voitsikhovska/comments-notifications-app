@@ -9,11 +9,16 @@
     </div>
   <% end %>
 
-  <div class="form-field">
+  <div class="form-field" data-controller="mention-autocomplete">
     <%= f.label :body, "Your comment", class: "form-label" %>
-    <%= f.text_area :body, rows: 4,
-          placeholder: "Write a comment… use @username to mention someone",
-          class: "form-input resize-none" %>
+    <div class="relative">
+      <%= f.text_area :body, rows: 4,
+            placeholder: "Write a comment… use @username to mention someone",
+            class: "form-input resize-none",
+            data: { mention_autocomplete_target: "input",
+                    action: "input->mention-autocomplete#onInput" } %>
+      <div class="mention-dropdown hidden" data-mention-autocomplete-target="dropdown"></div>
+    </div>
     <p class="text-hint mt-1"><%= comment.body.to_s.length %> / 1000</p>
   </div>
 
