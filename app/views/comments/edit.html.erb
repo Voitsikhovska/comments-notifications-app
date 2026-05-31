@@ -1,0 +1,12 @@
+<% content_for :title, "Edit Comment" %>
+
+<div class="max-w-lg mx-auto">
+  <div class="flex items-center gap-3 mb-6">
+    <%= link_to "← Back", comments_path, class: "link text-sm" %>
+    <h1 class="page-title mb-0">Edit Comment</h1>
+  </div>
+
+  <div class="card p-6">
+    <%= render "form", comment: @comment, url: comment_path(@comment), submit_label: "Save changes" %>
+  </div>
+</div>
