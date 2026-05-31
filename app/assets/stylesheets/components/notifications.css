@@ -1,0 +1,34 @@
+.notification-item {
+  @apply rounded-lg border p-4 transition-colors;
+}
+
+.notification-unread {
+  @apply bg-blue-50 border-blue-200;
+}
+
+.notification-read {
+  @apply bg-white border-gray-200 opacity-70;
+}
+
+.notification-preview {
+  @apply text-sm text-gray-600 mt-1 leading-relaxed whitespace-pre-wrap;
+}
+
+.nav-notifications {
+  @apply relative inline-flex items-center text-gray-500 hover:text-gray-800 transition-colors;
+}
+
+.nav-notifications-icon {
+  @apply w-5 h-5;
+}
+
+.notification-badge {
+  @apply absolute -top-1.5 -right-2 min-w-4 h-4 px-1
+         bg-red-500 text-white text-xs font-bold
+         rounded-full flex items-center justify-center
+         leading-none;
+}
+
+.btn-mark-read {
+  @apply text-xs font-medium text-blue-600 border border-blue-200 bg-white hover:bg-blue-50 px-3 py-1 rounded cursor-pointer transition-colors;
+}

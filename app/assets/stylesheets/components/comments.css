@@ -10,6 +10,22 @@
   @apply text-gray-800 text-base leading-relaxed whitespace-pre-wrap;
 }
 
+.mention {
+  @apply font-bold underline text-blue-600;
+}
+
+.mention-dropdown {
+  @apply absolute z-10 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden w-48;
+}
+
+.mention-suggestion {
+  @apply w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 flex items-center gap-1 cursor-pointer;
+}
+
+.mention-suggestion-at {
+  @apply text-blue-500 font-semibold;
+}
+
 .btn-edit {
   @apply text-xs font-medium text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded cursor-pointer transition-colors;
 }
