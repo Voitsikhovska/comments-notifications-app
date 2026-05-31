@@ -1,0 +1,39 @@
+<div class="form-card">
+  <h2 class="page-title">Sign in</h2>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="form-field">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input" %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :password, class: "form-label" %>
+      <div class="password-wrapper" data-controller="password-visibility">
+        <%= f.password_field :password, autocomplete: "current-password",
+            class: "form-input pr-10",
+            data: { password_visibility_target: "input" } %>
+        <button type="button" class="password-toggle" data-action="password-visibility#toggle">
+          <%= image_tag "eye-off.svg", class: "password-icon",
+              data: { password_visibility_target: "icon",
+                      eye_open_src: asset_path("eye.svg"),
+                      eye_off_src: asset_path("eye-off.svg") } %>
+        </button>
+      </div>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="mb-4 flex items-center gap-2">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me, class: "text-sm text-gray-600" %>
+      </div>
+    <% end %>
+
+    <%= f.submit "Sign in", class: "btn-primary w-full" %>
+  <% end %>
+
+  <div class="mt-4 text-sm text-gray-500">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Comments Notifications App" %></title>
+    <title><%= content_for(:title) || "CommentHub" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Comments Notifications App">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-gray-50 min-h-screen">
+    <nav class="bg-white border-b border-gray-200">
+      <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+        <%= link_to "CommentHub", root_path, class: "text-lg font-bold text-gray-900" %>
+        <div class="flex items-center gap-4">
+          <% if user_signed_in? %>
+            <span class="text-sm text-gray-500">@<%= current_user.username %></span>
+            <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-danger" %>
+          <% else %>
+            <%= link_to "Sign in", new_user_session_path, class: "link" %>
+            <%= link_to "Sign up", new_user_registration_path, class: "btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <% if notice %>
+      <div class="max-w-4xl mx-auto px-4 mt-4">
+        <p class="alert-success"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="max-w-4xl mx-auto px-4 mt-4">
+        <p class="alert-notice"><%= alert %></p>
+      </div>
+    <% end %>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+      <%= yield %>
+    </main>
   </body>
 </html>
