@@ -40,7 +40,15 @@ class CommentsController < ApplicationController
   end
 
   def load_comments
-    @comments = Comment.includes(:user).recent
+    @query = params[:q].to_s.strip
+
+    if @query.present?
+      ids = Comment.search(@query).map(&:id)
+      id_position = ids.each_with_index.to_h
+      @comments = Comment.includes(:user).where(id: ids).sort_by { |c| id_position[c.id] }
+    else
+      @comments = Comment.includes(:user).recent
+    end
   end
 
   def authorize_comment!

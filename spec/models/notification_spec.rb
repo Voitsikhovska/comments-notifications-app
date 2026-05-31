@@ -41,4 +41,16 @@ RSpec.describe Notification, type: :model do
       expect(notification.reload.read).to be true
     end
   end
+
+  describe "#unread?" do
+    it "returns true when the notification has not been read" do
+      notification = build(:notification, read: false)
+      expect(notification.unread?).to be true
+    end
+
+    it "returns false when the notification has been read" do
+      notification = build(:notification, read: true)
+      expect(notification.unread?).to be false
+    end
+  end
 end

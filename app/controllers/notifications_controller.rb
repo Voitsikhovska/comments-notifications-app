@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = current_user.notifications.includes(:actor, :comment).recent.to_a
-    @unread_count = @notifications.count { |n| !n.read? }
+    @unread_count = @notifications.count(&:unread?)
   end
 
   def update

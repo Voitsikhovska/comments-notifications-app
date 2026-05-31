@@ -1,0 +1,16 @@
+.search-form {
+  @apply w-full;
+}
+
+.search-input-wrapper {
+  @apply relative flex items-center;
+}
+
+.search-icon {
+  @apply absolute left-4 w-4 h-4 text-gray-400 pointer-events-none;
+}
+
+.search-input {
+  @apply w-full border border-gray-300 rounded-lg pl-9 py-2 px-2 text-sm
+         focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white;
+}
